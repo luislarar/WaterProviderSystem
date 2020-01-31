@@ -1,1 +1,1 @@
-web: gunicorn waterprovidersystem.wsgi
+web: gunicorn waterprovidersystem.waterprovidersystem.wsgi
