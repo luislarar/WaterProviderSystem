@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+{% load rest_framework %}
+{% load staticfiles %}
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        {% if edition_mode %}
+        <title>Editar cliente - Acme Admin</title>
+        {% else %}
+        <title>Registrar cliente - Acme Admin</title>
+        {% endif %}
+        <link href="{% static "coreapp/css/styles.css" %}" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/js/all.min.js" crossorigin="anonymous"></script>
+    </head>
+    <body class="bg-primary">
+        <div id="layoutAuthentication">
+            <div id="layoutAuthentication_content">
+                <main>
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-7">
+                                <div class="card shadow-lg border-0 rounded-lg mt-5">
+                                    <div class="card-header">
+                                        {% if edition_mode %}
+                                        <h3 class="text-center font-weight-light my-4">Editar Nuevo Cliente</h3>
+                                        {% else %}
+                                        <h3 class="text-center font-weight-light my-4">Registrar Nuevo Cliente</h3>
+                                        {% endif %}
+                                    </div>
+                                    <div class="card-body">
+                                        <form>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"><label class="small mb-1" for="inputNombre">Nombre y Apellido<div style="color: red">*</div></label><input class="form-control py-4" id="inputNombre" type="text" placeholder="Introduzca nombre y apellido" /></div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group"><label class="small mb-1" for="inputTelefono">Teléfono<div style="color: red">*</div></label><input class="form-control py-4" id="inputTelefono" type="text" placeholder="Ej: +999999999999" /></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group"><label class="small mb-1" for="inputDireccion">Direccion</label><input class="form-control py-4" id="inputDireccion" type="text" aria-describedby="emailHelp" placeholder="Introduzca direccion del cliente" /></div>
+                                            <div class="form-row">
+                                                <div class="col-md-6">
+                                                    <div class="form-group"><label class="small mb-1" for="inputCantAguaInicial">Cantidad de Agua al inicio de este mes (en metros cúbicos)</label><input class="form-control py-4" id="inputCantAguaInicial" type="number" placeholder="Metros cúbicos" /></div>
+                                                </div>
+                                                {% if edition_mode %}
+                                                <div class="col-md-6">
+                                                    <div class="form-group"><label class="small mb-1" for="inputCantAguaFinal">Cantidad de Agua al final de este mes (en metros cúbicos)</label><input class="form-control py-4" id="inputCantAguaFinal" type="number" placeholder="Metros cúbicos" /></div>
+                                                </div>
+                                                {% endif %}
+                                            </div>
+                                            
+                                            <div class="form-group mt-4 mb-0" onClick="javascript:this.form.submit();"><a class="btn btn-primary btn-block" href="login.html">Guardar</a></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+            <div id="layoutAuthentication_footer">
+                <footer class="py-4 bg-light mt-auto">
+                    <div class="container-fluid">
+                        <div class="d-flex align-items-center justify-content-between small">
+                            <div class="text-muted">Copyright &copy; Your Website 2019</div>
+                            <div>
+                                <a href="#">Privacy Policy</a>
+                                &middot;
+                                <a href="#">Terms &amp; Conditions</a>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+        <script src="{% static "coreapp/js/scripts.js" %}"></script>
+    </body>
+</html>

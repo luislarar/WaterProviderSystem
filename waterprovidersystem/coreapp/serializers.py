@@ -27,6 +27,14 @@ class ClienteSerializer (serializers.HyperlinkedModelSerializer):
 		cant_agua_final_mes = validated_data.pop('cant_agua_final_mes')
 		cant_agua_inicio_mes = validated_data.pop('cant_agua_inicio_mes')
 
+		if cant_agua_inicio_mes != instance.cant_agua_inicio_mes:
+			if instance.cant_agua_final_mes and instance.cant_agua_final_mes > cant_agua_inicio_mes:
+				if not cant_agua_final_mes or (cant_agua_final_mes and cant_agua_final_mes > cant_agua_inicio_mes):
+					raise serializers.ValidationError({'error':'La medición al final del período debe ser mayor a la inicial. Por favor corrija los errores del formulario.'})
+				else:
+					instance.cant_agua_final_mes  = cant_agua_final_mes
+			instance.cant_agua_inicio_mes = cant_agua_inicio_mes
+
 		if cant_agua_final_mes:
 			if cant_agua_final_mes < cant_agua_inicio_mes:
 				consumed_cost = (cant_agua_inicio_mes - cant_agua_final_mes)*mult_cost
@@ -47,10 +55,10 @@ class ClienteSerializer (serializers.HyperlinkedModelSerializer):
 
 	class Meta:
 		model = Cliente
-		fields = ('id','cant_agua_inicio_mes','cant_agua_final_mes','saldo_acumulado',
+		fields = ('id','cant_agua_inicio_mes','cant_agua_final_mes','saldo_acumulado','consumo_mes',
 					'nombre_propietario','telf_propietario',
 					'direccion')
-		read_only_fields = ('saldo_acumulado',)
+		read_only_fields = ('saldo_acumulado','consumo_mes')
 
 class PagoSerializer (serializers.HyperlinkedModelSerializer):
 

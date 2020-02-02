@@ -9,7 +9,7 @@ from django.dispatch import receiver
 class Cliente(models.Model):
 
 	# Propiedades para medir el consumo del cliente y el estado de solvencia
-	cant_agua_inicio_mes = models.PositiveIntegerField()
+	cant_agua_inicio_mes = models.PositiveIntegerField(default=0)
 	cant_agua_final_mes = models.PositiveIntegerField(null=True)
 	fecha_ultima_actualizacion = models.DateTimeField(default=timezone.now)
 	saldo_acumulado = models.IntegerField(default = 0)
@@ -19,11 +19,29 @@ class Cliente(models.Model):
 	nombre_propietario = models.CharField(max_length=80)
 	telf_propietario_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$',
 							message="Teléfono debe tener el formato: '+999999999'. Sólo se permite hasta 15 dígitos.")
-	telf_propietario = models.CharField(validators=[telf_propietario_regex], max_length=17)
+	telf_propietario = models.CharField(validators=[telf_propietario_regex], max_length=17,unique=True)
 	direccion = models.TextField()
 
 	def __str__(self):
 		return "ID: "+str(self.id) + " Nombre:" + self.nombre_propietario + " Telf:"+self.telf_propietario + " Saldo Acumulada:$"+str(self.saldo_acumulado)
+
+	@property
+	def consumo_mes(self):
+		if self.cant_agua_final_mes:
+			return self.cant_agua_inicio_mes - self.cant_agua_final_mes
+		else:
+			return 0
+
+	@property
+	def get_url(self):
+		return "/clientes/"+str(self.id)
+
+	@property
+	def es_deudor(self):
+		if self.saldo_acumulado < 0:
+			return True
+		return False
+	
 
 	def set_cant_agua_inicio (self,value):
 		self.cant_agua_inicio_mes = value
