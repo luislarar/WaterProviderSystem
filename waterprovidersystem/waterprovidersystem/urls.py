@@ -34,6 +34,6 @@ urlpatterns = [
     #re_path(r'^pagos/(?P<id>[\d]+)$',templates.ClientList, name='detalle pago'),
 ]
 
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-urlpatterns += staticfiles_urlpatterns()
+#from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+#urlpatterns += staticfiles_urlpatterns()
 

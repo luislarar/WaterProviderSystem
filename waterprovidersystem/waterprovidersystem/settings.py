@@ -25,7 +25,7 @@ SECRET_KEY = 'ejfm0f!jc@f@^+^67)304dnw7gw+p3s6@g88o497=ctjw@1#np'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['waterprovidersystem.herokuapp.com']
 
 
 # Application definition
@@ -121,6 +121,7 @@ STATIC_URL = '/static/'
 # Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'coreapp/static/'),
-    os.path.join(BASE_DIR, 'static/'),
+    #os.path.join(BASE_DIR, 'static/'),
 )
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+

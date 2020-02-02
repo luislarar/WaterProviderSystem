@@ -1,1 +1,1 @@
-web: gunicorn waterprovidersystem.waterprovidersystem.wsgi
+web: gunicorn --chdir waterprovidersystem waterprovidersystem.wsgi
